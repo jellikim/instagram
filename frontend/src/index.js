@@ -12,6 +12,8 @@ import { persistStore } from 'redux-persist';
 import { PersistGate } from 'redux-persist/integration/react';
 
 const sagaMiddleware = createSagaMiddleware();
+
+//리덕스 적용
 const store = createStore(
   rootReducer,
   composeWithDevTools(applyMiddleware(sagaMiddleware)),

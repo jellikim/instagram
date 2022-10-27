@@ -4,8 +4,6 @@ import { changeField, initializeForm, register } from '../../modules/auth';
 import AuthForm from '../../components/auth/AuthForm';
 import { check } from '../../modules/user';
 import { useNavigate } from 'react-router-dom';
-// import { useNavigate } from 'react-router-dom';
-// import data from '../../data/data.json';
 
 const RegisterForm = () => {
   const [error, setError] = useState(null);
@@ -16,12 +14,6 @@ const RegisterForm = () => {
     authError: auth.authError,
     user: user.user,
   }));
-
-  const navigate = useNavigate();
-
-  // data.map((data) => {
-  //   console.log(data.userId);
-  // });
 
   // 인풋 변경 이벤트 핸들러
   const onChange = (e) => {
@@ -39,8 +31,6 @@ const RegisterForm = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     const { username, password, passwordConfirm } = form;
-    // localStorage.setItem('username', `${username}`);
-    // localStorage.setItem('password', `${password}`);
     // 하나라도 비어 있다면
     if ([username, password, passwordConfirm].includes('')) {
       setError('빈 칸을 모두 입력하세요.');
@@ -82,9 +72,12 @@ const RegisterForm = () => {
     }
   }, [auth, authError, dispatch]);
 
+  const navigate = useNavigate();
+
   //user 값이 잘 설정되었는지 확인
   useEffect(() => {
     if (user) {
+      //로그인 상태 유지
       try {
         localStorage.setItem('user', JSON.stringify(user));
         navigate('/instagram');

@@ -7,13 +7,6 @@
   width: 100%;
   border: 1px solid #dbdbdb;
   background: #fafafa;
-  /* &:focus {
-    color: $oc-real-7;
-    border-bottom: 1px solid;
-  }
-  & + & {
-    margin-top: 1rem;
-  } */
 }
 
 .logo-area {
@@ -62,11 +55,6 @@ h4 {
   padding-bottom: 0.75rem;
   width: 100%;
   font-size: 1.125rem;
-
-  /* background: ${palette.gray[8]};
-  &:hover {
-    background: ${palette.gray[6]};
-  } */
 }
 
 .ErrorMessage {
@@ -85,12 +73,6 @@ h4 {
   background: white;
   border-radius: 2px;
   border: 1px solid #dbdbdb;
-
-  /* a {
-      text-decoration: underline;
-      &:hover {
-      }
-    } */
 }
 .blue {
   color: #3197f6;

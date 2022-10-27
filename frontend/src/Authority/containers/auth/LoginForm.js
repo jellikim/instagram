@@ -48,17 +48,14 @@ const LoginForm = ({ history }) => {
     }
     if (auth) {
       console.log('로그인 성공');
-      console.log(dispatch);
-      console.log('auth1->', auth);
-      console.log('user1->', user);
       dispatch(check());
-      console.log('auth2->', auth);
-      console.log('user2->', user);
     }
   }, [auth, authError, user, dispatch]);
 
+  //user 값이 잘 설정되었는지 확인
   useEffect(() => {
     if (user) {
+      //로그인상태 유지
       try {
         localStorage.setItem('user', JSON.stringify(user));
         navigate('/instagram');

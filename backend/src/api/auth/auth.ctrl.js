@@ -1,3 +1,4 @@
+//회원 인증 API
 import Joi from 'joi';
 import User from '../../models/user';
 
@@ -5,8 +6,8 @@ import User from '../../models/user';
 /*
  POST /api/auth/register 
  {
-    username: 'velopert'
-    password: 'mypass123'
+    username: 'test'
+    password: '123'
  }
  */
 export const register = async (ctx) => {
@@ -40,6 +41,7 @@ export const register = async (ctx) => {
     //응답할 데이터에서 hashedPassword 필드 제거
     ctx.body = user.serialize();
 
+    //사용자 토큰을 쿠키에 담아서 사용
     const token = user.generateToken();
     ctx.cookies.set('access_token', token, {
       maxAge: 1000 * 60 * 60 * 24 * 7, //7일
@@ -54,8 +56,8 @@ export const register = async (ctx) => {
 /*
  POST /api/auth/login
  {
-    username: 'velopert'
-    password: 'mypass123'
+    username: 'test'
+    password: '123'
  }
  */
 export const login = async (ctx) => {
@@ -74,6 +76,7 @@ export const login = async (ctx) => {
       ctx.status = 401;
       return;
     }
+    //계정이 유효하다면 비밀번호 검사
     const valid = await user.checkPassword(password);
     //잘못된 비밀번호
     if (!valid) {
@@ -81,6 +84,8 @@ export const login = async (ctx) => {
       return;
     }
     ctx.body = user.serialize();
+
+    //사용자 토큰을 쿠키에 담아서 사용
     const token = user.generateToken();
     ctx.cookies.set('access_token', token, {
       maxAge: 1000 * 60 * 60 * 24 * 7, //7일
@@ -92,6 +97,9 @@ export const login = async (ctx) => {
 };
 
 //로그인 상태 확인
+/*
+Get /api/auth/check
+*/
 export const check = async (ctx) => {
   const { user } = ctx.state;
   if (!user) {
@@ -107,6 +115,7 @@ export const check = async (ctx) => {
 Get /api/auth/logout
 */
 export const logout = async (ctx) => {
+  //쿠키를 지워줌
   ctx.cookies.set('access_token');
   ctx.status = 204; // No Content
 };

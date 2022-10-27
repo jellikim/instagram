@@ -1,3 +1,5 @@
+//사용자의 토큰을 확인한 후 검증하는 미들웨어
+
 import jwt from 'jsonwebtoken';
 import User from '../models/user';
 
@@ -6,6 +8,7 @@ const jwtMiddleware = async (ctx, next) => {
   if (!token) return next(); // 토큰이 없음
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    // 현재 토큰이 해석된 결과를 이후 미들웨어에서 사용할 수 있도록 ctx의 state 안에 넣기
     ctx.state.user = {
       _id: decoded._id,
       username: decoded.username,

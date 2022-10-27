@@ -1,3 +1,5 @@
+//auth 라우터
+
 import Router from 'koa-router';
 import * as authCtrl from './auth.ctrl';
 
